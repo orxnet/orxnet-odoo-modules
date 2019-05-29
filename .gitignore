@@ -1,0 +1,30 @@
+# PyCharm
+.idea/workspace.xml
+.idea/tasks.xml
+
+# Anybox buildout recipe related
+develop-eggs
+eggs/*
+parts/*
+buildout.cfg
+anybox.recipe.odoo
+etc
+bin
+upgrade.py
+upgrade.log
+.installed.cfg
+
+# Python
+*.pyc
+
+# Fabric-odoo
+*.bak
+
+# SFIT shortcut scripts
+restart
+install
+stop
+local.cfg
+
+# Custom packages that are sometimes installed
+magento
