@@ -5,8 +5,8 @@
 # Anybox buildout recipe related
 develop-eggs
 eggs/*
-parts/*
-buildout.cfg
+parts/*:wq
+
 anybox.recipe.odoo
 etc
 bin
