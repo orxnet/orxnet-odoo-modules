@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/anybox.recipe.odoo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/parts/bank-statement-import" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/parts/crm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/parts/l10n-netherlands" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/parts/odoo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/parts/server-tools" vcs="Git" />
+  </component>
+</project>
