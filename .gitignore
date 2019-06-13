@@ -1,12 +1,10 @@
 # PyCharm
 .idea/workspace.xml
 .idea/tasks.xml
-.idea/vcs.xml
 
 # Anybox buildout recipe related
 develop-eggs
 eggs/*
-parts/*:wq
 
 anybox.recipe.odoo
 etc
