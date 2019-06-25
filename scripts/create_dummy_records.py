@@ -8,7 +8,7 @@ odoo = odoorpc.ODOO('localhost', port=8069)
 print(odoo.db.list())
 
 # Login
-odoo.login('boekenbalie', 'admin', 'admin')
+odoo.login('odoo11database', 'admin', 'admin')
 
 # # access the sale.order model
 # if 'sale.order' in odoo.env:

@@ -28,3 +28,7 @@ local.cfg
 
 # Custom packages that are sometimes installed
 magento
+
+# Random
+base2.cfg
+logfile
