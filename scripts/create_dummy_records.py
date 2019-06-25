@@ -8,7 +8,7 @@ odoo = odoorpc.ODOO('localhost', port=8069)
 print(odoo.db.list())
 
 # Login
-odoo.login('odoo11database', 'admin', 'admin')
+odoo.login('boekenbalie', 'admin', 'admin')
 
 # # access the sale.order model
 # if 'sale.order' in odoo.env:
@@ -25,7 +25,7 @@ odoo.login('odoo11database', 'admin', 'admin')
 # access the sale.order model
 if 'sale.order' in odoo.env:
     Order = odoo.env['sale.order']
-    order_ids = Order.search([('state', '=', 'draft')], limit=400)
+    order_ids = Order.search([('state', '=', 'draft')], limit=500)
     to_confirm = Order.browse(order_ids)
     for order in to_confirm:
         order.action_confirm()
