@@ -32,3 +32,5 @@ magento
 # Random
 base2.cfg
 logfile
+*.save
+*.save.*
