@@ -1,0 +1,1 @@
+python3 bootstrap.py -c local.cfg --buildout-version=2.12.2
