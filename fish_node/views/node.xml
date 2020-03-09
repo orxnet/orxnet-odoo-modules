@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="node_list_view_form" model="ir.ui.view">
+            <field name="name">Node</field>
+            <field name="model">orxnet.node</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div style="background-color: #FFFFFF; padding: 0px; font-size: 0.875rem">
+                        <div style="padding: 1.00rem 1.25rem; background-color: rgba(0, 0, 0, 0.03); height:50px; border-bottom: 1px solid rgba(0, 0, 0, 0.125)">
+                            <div class="row">
+                                <div class="col-1.2" style="padding:0px 0px 0px 10px">
+                                    <h3><small class="text-muted"><span>Device - </span></small></h3>
+                                </div>
+                                <div class="col-5">
+                                    <h3><field name="name"/></h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row" style="padding: 1.25rem">
+                            <div class="col-sm">
+                                <h6>Type</h6>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <field name="device_type_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <h6>Connection</h6>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <field name="connection_type_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <h6>Mac</h6>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <field name="mac"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <h6>Ip</h6>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <field name="ip"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+<!--        <record id="node_list_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">Nodes</field>-->
+<!--            <field name="model">orxnet.node</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="device_type_id"/>-->
+<!--                    <field name="connection_type_id"/>-->
+<!--                    <field name="ip" readonly="1"/>-->
+<!--                    <field name="event_happened" readonly="1"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="node_list_view_form" model="ir.ui.view">-->
+<!--            <field name="name">Node Form</field>-->
+<!--            <field name="model">orxnet.node</field>-->
+<!--            <field name="target">inline</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col">-->
+<!--                            <h3>Current values</h3>-->
+<!--                            <group>-->
+<!--                                <field name="name" readonly="1"/>-->
+<!--                                <field name="device_type_id"/>-->
+<!--                                <field name="connection_type_id"/>-->
+<!--                                <field name="mac"/>-->
+<!--                                <field name="ip" readonly="1" class="oe_read_only"/>-->
+<!--                            </group>-->
+<!--                        </div>-->
+<!--                        <div class="col">-->
+<!--                            <h3>Changes made</h3>-->
+<!--                            <group>-->
+<!--                                <field name="edit_name_event" string="" readonly="1" class="oe_read_only"/>-->
+<!--                                <field name="edit_type_event" string="" readonly="1" class="oe_read_only"/>-->
+<!--                                <field name="edit_connection_event" string="" readonly="1" class="oe_read_only"/>-->
+<!--                                <field name="edit_mac_event" string="" readonly="1" class="oe_read_only"/>-->
+<!--                                <field name="add_event" string="Add" readonly="1" class="oe_read_only"/>-->
+<!--                                <field name="delete_event" string="Delete" readonly="1" class="oe_read_only"/>-->
+<!--                            </group>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="node_list_view_search" model="ir.ui.view">-->
+<!--            <field name="name">Node Search</field>-->
+<!--            <field name="model">orxnet.node</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search>-->
+<!--                    <field name="name"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="action_add_node_form" model="ir.actions.act_window">-->
+<!--            <field name="name">Nodes</field>-->
+<!--            <field name="res_model">orxnet.node</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--        </record>-->
+    </data>
+</openerp>
+
+

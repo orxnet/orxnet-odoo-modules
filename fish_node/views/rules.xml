@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="rules_view_form" model="ir.ui.view">
+            <field name="name">Rules Form</field>
+            <field name="model">orxnet.rules</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="add_needs_accept_from_customer"/>
+                        <field name="delete_needs_accept_from_customer"/>
+                        <field name="name_edit_needs_accept_from_customer"/>
+                        <field name="type_edit_needs_accept_from_customer"/>
+                        <field name="connection_edit_needs_accept_from_customer"/>
+                        <field name="mac_edit_needs_accept_from_customer"/>
+
+                        <field name="add_needs_accept_from_orxnet"/>
+                        <field name="delete_needs_accept_from_orxnet"/>
+                        <field name="name_edit_needs_accept_from_orxnet"/>
+                        <field name="type_edit_needs_accept_from_orxnet"/>
+                        <field name="connection_edit_needs_accept_from_orxnet"/>
+                        <field name="mac_edit_needs_accept_from_orxnet"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="action_rules_form" model="ir.actions.act_window">
+            <field name="name">Rules</field>
+            <field name="res_model">orxnet.rules</field>
+            <field name="view_type">form</field>
+        </record>
+        <menuitem
+            id="rules_menu"
+            name="Rules"
+            action="action_rules_form"
+            parent=""
+            groups="base.group_user"
+            sequence="6" />
+    </data>
+</openerp>
+
+

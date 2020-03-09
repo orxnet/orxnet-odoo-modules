@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="orxnet_wifi" model="connection.type">
+            <field name="name">Wifi</field>
+        </record>
+
+        <record id="orxnet_wifi_subnet_registered" model="orxnet.subnet">
+            <field name="name">Subnet for registered devices</field>
+            <field name="ip_network_string">192.178.0.0/16</field>
+            <field name="connection_type_id" ref="fish_node.orxnet_wifi"/>
+        </record>
+
+    </data>
+</openerp>

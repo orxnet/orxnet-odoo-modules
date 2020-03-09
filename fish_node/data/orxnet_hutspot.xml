@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="orxnet_hutspot" model="connection.type">
+            <field name="name">Hutspot</field>
+        </record>
+
+        <record id="orxnet_hutspot_subnet_voucher" model="orxnet.subnet">
+            <field name="name">Subnet for devices with voucher</field>
+            <field name="ip_network_string">68.0.0.0/16</field>
+            <field name="connection_type_id" ref="fish_node.orxnet_hutspot"/>
+        </record>
+
+        <record id="orxnet_hutspot_subnet_unregistered" model="orxnet.subnet">
+            <field name="name">Subnet for unregistered devices</field>
+            <field name="ip_network_string">68.168.0.0/16</field>
+            <field name="connection_type_id" ref="fish_node.orxnet_hutspot"/>
+        </record>
+
+    </data>
+</openerp>

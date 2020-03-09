@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="orxnet_default_rules" model="orxnet.rules">
+            <field name="add_needs_accept_from_customer">True</field>
+            <field name="delete_needs_accept_from_customer">True</field>
+            <field name="name_edit_needs_accept_from_customer">True</field>
+            <field name="type_edit_needs_accept_from_customer">True</field>
+            <field name="connection_edit_needs_accept_from_customer">True</field>
+            <field name="mac_edit_needs_accept_from_customer">True</field>
+
+            <field name="add_needs_accept_from_orxnet">True</field>
+            <field name="delete_needs_accept_from_orxnet">True</field>
+            <field name="name_edit_needs_accept_from_orxnet">True</field>
+            <field name="type_edit_needs_accept_from_orxnet">True</field>
+            <field name="connection_edit_needs_accept_from_orxnet">True</field>
+            <field name="mac_edit_needs_accept_from_orxnet">True</field>
+        </record>
+
+    </data>
+</openerp>

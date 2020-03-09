@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="connection_type_list_view_tree" model="ir.ui.view">
+            <field name="name">Connection Type Tree</field>
+            <field name="model">connection.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+<!--                    <field name="subnets_ids"/>-->
+                </tree>
+            </field>
+        </record>
+        <record id="connection_type_list_view_form" model="ir.ui.view">
+            <field name="name">Connection Type Form</field>
+            <field name="model">connection.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="subnet_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+<!--        <record id="connection_type_list_view_search" model="ir.ui.view">-->
+<!--            <field name="name">Connection Type Search</field>-->
+<!--            <field name="model">connection.type</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search>-->
+<!--                    <field name="name"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+        <record id="connection_type_list_action" model="ir.actions.act_window">
+            <field name="name">Connection types</field>
+            <field name="res_model">connection.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+<!--            <field name="view_ids" eval="[(5, 0, 0),-->
+<!--                (0, 0, {'view_mode': 'kanban', 'view_id': ref('connection_type_list_view_kanban')}),-->
+<!--                (0, 0, {'view_mode': 'form', 'view_id': ref('connection_type_list_view_form')})]"/>-->
+<!--            <field name="search_view_id" ref="connection_type_list_view_search"/>-->
+        </record>
+        <menuitem
+            id="connection_type_list_menu"
+            name="Connection types"
+            action="connection_type_list_action"
+            parent=""
+            groups="base.group_user"
+            sequence="7" />
+    </data>
+</openerp>
+
+

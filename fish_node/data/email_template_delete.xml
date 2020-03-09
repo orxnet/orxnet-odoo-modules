@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="email_template_delete" model="mail.template">
+            <field name="name">Customer Delete Device Email</field>
+            <field name="email_from">helpdesk@orxnet.org</field>
+<!--            <field name="email_cc">helpdesk@orxnet.org</field>-->
+            <field name="subject">You deleted Device - --device_name-- from orxnet</field>
+            <field name="body_html" type="html">
+
+                <p><strong>Hey --customer_name--,</strong></p>
+                <br/>
+                <p>Op jou Orxnet account is een apparaat verwijderd van het netwerk.</p>
+                <br/>
+                <div style="border:3px solid black; width: 500px">
+                                <div style="padding:10px; background-color:#ff9900">
+                                        <small class="text-muted">Device - </small><span>--device_name--</span>
+                                </div>
+                                <div style="background-color:#ffcc00">
+                                     <table style="text-align:center; width:500px; padding:10px">
+                                          <tr>
+                                              <th>Type</th>
+                                              <th>Connection</th>
+                                              <th>Mac Address</th>
+                                              <th>Ip Address</th>
+                                          </tr>
+                                          <tr>
+                                              <td>--type--</td>
+                                              <td>--connection--</td>
+                                              <td>--mac_address--</td>
+                                              <td>--ip_address--</td>
+                                          </tr>
+                                     </table>
+                                </div>
+                </div>
+                <br/>
+                <p>Bedankt,</p>
+                <p>Orxnet</p>
+
+            </field>
+        </record>
+    </data>
+</openerp>

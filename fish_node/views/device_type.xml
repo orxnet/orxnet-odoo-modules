@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="device_type_list_view_tree" model="ir.ui.view">
+            <field name="name">Device Type Tree</field>
+            <field name="model">device.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="device_type_list_view_form" model="ir.ui.view">
+            <field name="name">Device Type Form</field>
+            <field name="model">device.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="device_type_list_action" model="ir.actions.act_window">
+            <field name="name">Device types</field>
+            <field name="res_model">device.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem
+            id="device_type_list_menu"
+            name="Device types"
+            action="device_type_list_action"
+            parent=""
+            groups="base.group_user"
+            sequence="8" />
+    </data>
+</openerp>
+
+

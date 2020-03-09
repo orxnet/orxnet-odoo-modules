@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="afdeling_list_view_tree" model="ir.ui.view">
+            <field name="name">Afdeling Tree</field>
+            <field name="model">orkz.afdeling</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="afdeling_list_view_form" model="ir.ui.view">
+            <field name="name">Afdeling Form</field>
+            <field name="model">orkz.afdeling</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="afdeling_list_action" model="ir.actions.act_window">
+            <field name="name">Afdelingen</field>
+            <field name="res_model">orkz.afdeling</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem
+            id="afdeling_list_menu"
+            name="Afdelingen"
+            action="afdeling_list_action"
+            parent=""
+            groups="base.group_user"
+            sequence="8" />
+    </data>
+</openerp>
+
+

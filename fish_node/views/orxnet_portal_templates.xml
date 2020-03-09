@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_layout" name="Portal layout: node menu entry" inherit_id="portal.portal_breadcrumbs" priority="40">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'edit_node' or page_name == 'delete_node'" class="breadcrumb-item active">
+                <t t-esc="node.name"/>
+            </li>
+            <li t-if="page_name == 'add_node'" class="breadcrumb-item active">
+                <span>New device</span>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_layout_fish" inherit_id="portal.portal_layout" priority="40">
+        <xpath expr="//div[hasclass('o_portal_my_details')]" position="replace">
+            <h4>Your Details <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Edit</a></h4>
+            <hr class="mt-1 mb-0"/>
+            <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>
+            <t t-if="user_id.partner_id.afdeling">
+                <div>
+                    <i class="fa fa-home" style="margin: 10px 6px 10px 2px"/><span> </span><t t-esc="user_id.partner_id.afdeling"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home" name="Portal My Home: node entries" inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_my_home')]/h3" position="replace">
+        </xpath>
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <a role="button" t-attf-href="/my/add/current" class="btn btn-sm btn-primary mb32" style="font-size:150%; padding:15px; margin: 15px"><i class="fa fa-plus"/> Add Current Device</a>
+            <a role="button" t-attf-href="/my/add/other" class="btn btn-sm btn-primary mb32" style="font-size:150%; padding:15px; margin: 15px"><i class="fa fa-plus"/> Add Other Device</a>
+            <t t-call="fish_node.display_all_nodes"/>
+        </xpath>
+    </template>
+
+    <template id="portal_my_orkz_details" inherit_id="portal.portal_my_details" priority="40">
+        <xpath expr="//div[hasclass('o_portal_details')]" position="replace">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <div t-if="error_message" class="alert alert-danger" role="alert">
+                          <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                      </div>
+                    </div>
+                    <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
+                        <label class="col-form-label" for="name">Your Name</label>
+                        <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name or partner.name" />
+                    </div>
+                    <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-xl-6">
+                        <label class="col-form-label" for="email">Email</label>
+                        <input type="email" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="email or partner.email" />
+                    </div>
+                    <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-xl-6">
+                        <label class="col-form-label" for="phone">Phone</label>
+                        <input type="tel" name="phone" t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="phone or partner.phone" />
+                    </div>
+                    <div class="clearfix" />
+                    <div t-attf-class="form-group #{error.get('afdeling') and 'o_has_error' or ''} col-xl-6">
+                        <label class="col-form-label" for="afdeling">Afdeling</label>
+                        <select name="afdeling" t-attf-class="form-control #{error.get('afdeling') and 'is-invalid' or ''}">
+                            <option value="">Select...</option>
+                            <t t-foreach="afdelingen or []" t-as="orkz_afdeling">
+                                <option t-att-value="orkz_afdeling.name" t-att-selected="orkz_afdeling.name == partner.afdeling">
+                                    <t t-esc="orkz_afdeling.name" />
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <button type="submit" class="btn btn-primary float-right mb32 ">
+                        Confirm
+                        <span class="fa fa-long-arrow-right" />
+                    </button>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="display_all_nodes">
+        <h3>Your Devices</h3>
+        <t t-if="node_ids" t-call="portal.portal_table">
+            <tbody>
+                <tr t-foreach="node_ids" t-as="node">
+                    <t t-call="fish_node.display_node"/>
+                </tr>
+            </tbody>
+        </t>
+    </template>
+
+    <template id="display_node">
+        <div style="margin: 15px 15px 15px 15px; border-style: hidden">
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h5 class="mb-0">
+                        <small class="text-muted">Device - </small><span t-field="node.name"/>
+                        <a role="button" t-attf-href="/my/device/edit/#{node.id}?{{ keep_query() }}" class="btn btn-sm btn-link float-right"><i class="fa fa-pencil"/> Edit</a>
+                        <a role="button" t-attf-href="/my/device/delete/#{node.id}?{{ keep_query() }}" class="btn btn-sm btn-link float-right"><i class="fa fa-trash-o o_delete"/> Delete</a>
+                    </h5>
+                </t>
+                <t t-set="card_body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h6>Type</h6>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span t-field="node.device_type_id"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <h6>Connection</h6>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span t-field="node.connection_type_id"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <h6>Mac Address</h6>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span t-field="node.mac"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <h6>Ip Address</h6>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <span t-field="node.ip"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </div>
+    </template>
+
+    <template id="portal_edit_node">
+        <t t-call="portal.portal_layout">
+            <br/>
+            <div class="row">
+                <div class="col-sm-10">
+                    <h3>Edit Device</h3>
+                    <form action="" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div style="margin: 30px 30px 30px 30px; border-style: hidden">
+                            <t t-call="portal.portal_record_layout">
+                                <t t-set="card_header">
+                                    <h4 t-attf-class="form-group #{error.get('node.name') and 'o_has_error' or ''} mb-0">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <small class="text-muted">Device - </small>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="node.name" />
+                                            </div>
+
+                                        </div>
+                                    </h4>
+                                </t>
+                                <t t-set="card_body">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <h5>Type</h5>
+                                            <div class="row">
+                                                <div t-attf-class="form-group #{error.get('node.device_type_id') and 'o_has_error' or ''} col-sm">
+                                                    <select name="device_type_id" t-attf-class="form-control #{error.get('device_type_id') and 'is-invalid' or ''}">
+                                                        <option value="">Type...</option>
+                                                        <t t-foreach="device_types or []" t-as="device_type">
+                                                            <option t-att-value="device_type.id" t-att-selected="device_type.id == node.device_type_id.id">
+                                                                <t t-esc="device_type.name" />
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Connection</h5>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <span t-field="node.connection_type_id"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Mac Address</h5>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <span t-field="node.mac"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Ip Address</h5>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <span t-field="node.ip"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                        <div class="clearfix">
+                            <a type="button" t-attf-href="/my" class="btn btn-primary float-left mb32" style="margin-right: 10px">
+                                Cancel
+                                <span class="fa fa-times" />
+                            </a>
+                            <button type="reset" class="btn btn-primary mb32 ">
+                                Reset
+                                <span class="fa fa-rotate-left" />
+                            </button>
+                            <button type="submit" class="btn btn-primary float-right mb32 ">
+                                Confirm
+                                <span class="fa fa-long-arrow-right" />
+                            </button>
+                        </div>
+                        <div t-if="error_message" class="alert alert-danger" role="alert">
+                            <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_add_other_node">
+        <t t-call="portal.portal_layout">
+            <br/>
+            <div class="row">
+                <div class="col-sm-10">
+                    <h3>Add Device</h3>
+                    <form action="" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div style="margin: 30px 30px 30px 30px; border-style: hidden">
+                            <t t-call="portal.portal_record_layout">
+                                <t t-set="card_header">
+                                    <h4 t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} mb-0">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <small class="text-muted">Device - </small>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="previous_post_name" />
+                                            </div>
+                                        </div>
+                                    </h4>
+                                </t>
+                                <t t-set="card_body">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <h5>Type</h5>
+                                            <div class="row">
+                                                <div t-attf-class="form-group #{error.get('device_type_id') and 'o_has_error' or ''} col-sm">
+                                                    <select name="device_type_id" t-attf-class="form-control #{error.get('device_type_id') and 'is-invalid' or ''}">
+                                                        <option value="">Type...</option>
+                                                        <t t-foreach="device_types or []" t-as="device_type">
+                                                            <option t-att-value="device_type.id" t-att-selected="device_type.id == (previous_post_device_type_id)">
+                                                                <t t-esc="device_type.name" />
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Connection</h5>
+                                            <div class="row">
+                                                <div t-attf-class="form-group #{error.get('connection_type_id') and 'o_has_error' or ''} col-sm">
+                                                    <select name="connection_type_id" t-attf-class="form-control #{error.get('connection_type_id') and 'is-invalid' or ''}">
+                                                        <option value="">Connection...</option>
+                                                        <t t-foreach="connection_types or []" t-as="connection_type">
+                                                            <option t-att-value="connection_type.id" t-att-selected="connection_type.id == (previous_post_connection_type_id)">
+                                                                <t t-esc="connection_type.name" />
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Mac Address</h5>
+                                            <div class="row">
+                                                <div t-attf-class="form-group col-sm">
+                                                    <input type="text" name="mac" t-attf-class="form-control #{error.get('mac') and 'is-invalid' or ''}" t-att-value="previous_post_mac" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Ip Address</h5>
+                                            <div class="row">
+                                                <div class="col flex-grow-0 pr-3">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                            </div>
+                            <div class="clearfix">
+                                <a type="button" t-attf-href="/my" class="btn btn-primary float-left mb32">
+                                    Cancel
+                                    <span class="fa fa-times" />
+                                </a>
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                    Confirm
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
+                            </div>
+                            <div t-if="error_message" class="alert alert-danger" role="alert">
+                                <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_add_current_node">
+        <t t-call="portal.portal_layout">
+            <br/>
+            <div class="row">
+                <div class="col-sm-10">
+                    <h3>Add Device</h3>
+                    <form action="" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div style="margin: 30px 30px 30px 30px; border-style: hidden">
+                            <t t-call="portal.portal_record_layout">
+                                <t t-set="card_header">
+                                    <h4 t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} mb-0">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <small class="text-muted">Device - </small>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="previous_post_name" />
+                                            </div>
+
+                                        </div>
+                                    </h4>
+                                </t>
+                                <t t-set="card_body">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <h5>Type</h5>
+                                            <div class="row">
+                                                <div t-attf-class="form-group #{error.get('device_type_id') and 'o_has_error' or ''} col-sm">
+                                                    <select name="device_type_id" t-attf-class="form-control #{error.get('device_type_id') and 'is-invalid' or ''}">
+                                                        <option value="">Type...</option>
+                                                        <t t-foreach="device_types or []" t-as="device_type">
+                                                            <option t-att-value="device_type.id" t-att-selected="device_type.id == (previous_post_device_type_id)">
+                                                                <t t-esc="device_type.name" />
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Connection</h5>
+                                            <div class="row">
+                                                <div t-attf-class="form-group col-sm">
+                                                    <t t-esc="connection_type.name" />
+                                                    <input type="hidden" name="connection_type_id" t-att-value="connection_type.id"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Mac Address</h5>
+                                            <div class="row">
+                                                <div t-attf-class="form-group col-sm">
+                                                    <t t-esc="mac"/>
+                                                    <input type="hidden" name="mac" t-att-value="mac"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Ip Address</h5>
+                                            <div class="row">
+                                                <div class="col flex-grow-0 pr-3">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                            </div>
+                            <div class="clearfix">
+                                <a type="button" t-attf-href="/my" class="btn btn-primary float-left mb32">
+                                    Cancel
+                                    <span class="fa fa-times" />
+                                </a>
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                    Confirm
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
+                            </div>
+                            <div t-if="error_message" class="alert alert-danger" role="alert">
+                                <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_delete_node">
+        <t t-call="portal.portal_layout">
+            <br/>
+            <div class="row">
+                <div class="col-sm-8">
+                    <h3>Delete Device</h3>
+                    <form action="" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="delete" t-att-value="True"/>
+                        <div style="margin: 30px 30px 30px 30px; border-style: hidden">
+                            <t t-call="portal.portal_record_layout">
+                                <t t-set="card_header">
+                                    <h4 class="mb-0">
+                                        <small class="text-muted">Device - </small><span t-field="node.name"/>
+                                    </h4>
+                                </t>
+                                <t t-set="card_body">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <h5>Type</h5>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <t t-esc="node.device_type_id.name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Connection</h5>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <t t-esc="node.connection_type_id.name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Mac Address</h5>
+                                            <div class="row">
+                                                <div t-attf-class="col-sm">
+                                                    <t t-esc="node.mac"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <h5>Ip Address</h5>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <t t-esc="node.ip" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                        <div class="clearfix">
+                            <h4>Are you sure?</h4>
+                            <a type="button" t-attf-href="/my" class="btn btn-primary mb32" style="margin-right: 20px">
+                                No
+                            </a>
+                            <button type="submit" class="btn btn-primary mb32 ">
+                                Yes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+
+
+</odoo>

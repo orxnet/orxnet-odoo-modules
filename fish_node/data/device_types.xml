@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="device_type_phone" model="device.type">
+            <field name="name">Phone</field>
+        </record>
+
+        <record id="device_type_laptop" model="device.type">
+            <field name="name">Laptop</field>
+        </record>
+
+        <record id="device_type_pc" model="device.type">
+            <field name="name">PC</field>
+        </record>
+
+        <record id="device_type_tablet" model="device.type">
+            <field name="name">Tablet</field>
+        </record>
+
+        <record id="device_type_tv" model="device.type">
+            <field name="name">TV</field>
+        </record>
+
+    </data>
+</openerp>

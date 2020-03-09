@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>
+
+        <record id="customer_list_view_tree" model="ir.ui.view">
+            <field name="name">Customers</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_edit_node" model="ir.actions.act_window">
+            <field name="name">Edit node</field>
+            <field name="res_model">orxnet.node</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_add_node" model="ir.actions.act_window">
+            <field name="name">Create node</field>
+            <field name="res_model">orxnet.node</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="customer_list_view_form" model="ir.ui.view">
+            <field name="name">Customer Form</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div class="row" style="background-color: #ececec">
+                        <div class="col-3"/>
+                        <div class="col-3">
+                            <br/>
+                            <h2>Devices</h2>
+                            <field name="node_ids">
+                                <kanban>
+                                    <field name="name"/>
+                                    <field name="device_type_id"/>
+                                    <field name="connection_type_id"/>
+                                    <field name="mac"/>
+                                    <field name="ip"/>
+                                    <field name="add_event"/>
+                                    <field name="delete_event"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <t t-if="record.add_event.raw_value">
+                                                <div t-attf-class="oe_kanban_card oe_kanban_global_click" style="background-color: #cdff8f; padding: 0px; font-size: 0.875rem">
+                                                    <div class="o_kanban_record_top" style="padding: 1.00rem 1.25rem; background-color: rgba(0, 0, 0, 0.03); height:50px; border-bottom: 1px solid rgba(0, 0, 0, 0.125)">
+<!--                                                        <div class="row">-->
+                                                            <div class="col-9" style="padding:0px">
+                                                                <h3><small class="text-muted"><span>Device - </span></small><t t-esc="record.name.value"/></h3>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <button name="accept_events" type="object" class="btn btn-sm"><i class="fa fa-check"/> Accept</button>
+                                                            </div>
+<!--                                                        </div>-->
+                                                    </div>
+                                                    <div class="o_kanban_record_bottom" style="padding: 1.25rem">
+                                                        <div class="col-sm">
+                                                            <h6>Type</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <t t-esc="record.device_type_id.value"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Connection</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="connection_type_id"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Mac</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="mac"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Ip</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="ip"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                            <t t-elif="record.delete_event.raw_value">
+                                                <div t-attf-class="oe_kanban_card oe_kanban_global_click" style="background-color: #ff3333; padding: 0px; font-size: 0.875rem">
+                                                    <div class="o_kanban_record_top" style="padding: 1.00rem 1.25rem; background-color: rgba(0, 0, 0, 0.03); height:50px; border-bottom: 1px solid rgba(0, 0, 0, 0.125)">
+                                                        <h3><small class="text-muted"><span>Device - </span></small><t t-esc="record.name.value"/></h3>
+                                                        <div style="float: right"><button name="accept_events" type="object" class="btn btn-sm btn-link"><i class="fa fa-check"/> Accept</button></div>
+                                                    </div>
+                                                    <div class="o_kanban_record_bottom" style="padding: 1.25rem">
+                                                        <div class="col-sm">
+                                                            <h6>Type</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <t t-esc="record.device_type_id.value"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Connection</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="connection_type_id"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Mac</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="mac"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Ip</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="ip"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <div t-attf-class="oe_kanban_card oe_kanban_global_click" style="background-color: #FFFFFF; padding: 0px; font-size: 0.875rem">
+                                                    <div class="o_kanban_record_top" style="padding: 1.00rem 1.25rem; background-color: rgba(0, 0, 0, 0.03); height:50px; border-bottom: 1px solid rgba(0, 0, 0, 0.125)">
+                                                        <h3><small class="text-muted"><span>Device - </span></small><t t-esc="record.name.value"/></h3>
+                                                    </div>
+                                                    <div class="o_kanban_record_bottom" style="padding: 1.25rem">
+                                                        <div class="col-sm">
+                                                            <h6>Type</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <t t-esc="record.device_type_id.value"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Connection</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="connection_type_id"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Mac</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="mac"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <h6>Ip</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm">
+                                                                    <field name="ip"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </div>
+                        <div class="col-3"/>
+                        <div class="col-2">
+                            <br/>
+                            <h2>Details</h2>
+                            <br/>
+
+                            <table style="width:100%">
+                                <tr>
+                                    <td colspan="2"><h6><field name="name"/></h6></td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: middle"><i class="fa fa-phone"/></td>
+                                    <td style="vertical-align: middle; padding:5px"><field name="phone"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: middle"><i class="fa fa-envelope"/></td>
+                                    <td style="vertical-align: middle; padding:5px"><field name="email"/></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: middle"><i class="fa fa-home"/></td>
+                                    <td style="vertical-align: middle; padding:5px"><field name="afdeling"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-1"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="customer_list_view_search" model="ir.ui.view">
+            <field name="name">Customer Search</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <record id="customer_list_action" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('customer_list_view_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('customer_list_view_form')})]"/>
+            <field name="search_view_id" ref="customer_list_view_search"/>
+        </record>
+        <menuitem
+            id="customer_list_menu"
+            name="Customers"
+            action="customer_list_action"
+            parent=""
+            groups="base.group_user"
+            sequence="5" />
+
+    </data>
+</openerp>
+
+

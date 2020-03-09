@@ -1,0 +1,14 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+orxnet_customer_access_user,orxnet_customer_access_user,model_res_partner,base.group_user,1,1,1,1
+orxnet_node_access_user,orxnet_node_access_user,model_orxnet_node,base.group_user,1,1,1,1
+orxnet_connection_type_access_user,orxnet_connection_type_access_user,model_connection_type,base.group_user,1,1,1,1
+orxnet_device_type_access_user,orxnet_device_type_access_user,model_device_type,base.group_user,1,1,1,1
+orxnet_subnet_access_user,orxnet_subnet_access_user,model_orxnet_subnet,base.group_user,1,1,1,1
+orxnet_afdeling_access_user,orxnet_afdeling_access_user,model_orkz_afdeling,base.group_user,1,1,1,1
+orxnet_rules_access_user,orxnet_rules_access_user,model_orxnet_rules,base.group_user,1,0,0,0
+orxnet_node_access_portal,orxnet_node_access_portal,model_orxnet_node,base.group_portal,1,1,1,1
+orxnet_device_type_access_portal,orxnet_device_type_access_portal,model_device_type,base.group_portal,1,0,0,0
+orxnet_connection_type_access_portal,orxnet_connection_type_access_portal,model_connection_type,base.group_portal,1,0,0,0
+orxnet_orxnet_subnet_access_portal,orxnet_orxnet_subnet_access_portal,model_orxnet_subnet,base.group_portal,1,0,0,0
+orxnet_afdeling_access_portal,orxnet_afdeling_access_portal,model_orkz_afdeling,base.group_portal,1,0,0,0
+orxnet_rules_access_portal,orxnet_rules_access_portal,model_orxnet_rules,base.group_portal,1,0,0,0

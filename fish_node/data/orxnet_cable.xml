@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="orxnet_cable" model="connection.type">
+            <field name="name">Cable</field>
+        </record>
+
+        <record id="orxnet_cable_subnet_registered" model="orxnet.subnet">
+            <field name="name">Subnet for registered devices</field>
+            <field name="ip_network_string">127.168.0.0/16</field>
+            <field name="connection_type_id" ref="fish_node.orxnet_cable"/>
+        </record>
+
+        <record id="orxnet_cable_subnet_unregistered" model="orxnet.subnet">
+            <field name="name">Subnet for unregistered devices</field>
+            <field name="ip_network_string">127.0.0.0/16</field>
+            <field name="connection_type_id" ref="fish_node.orxnet_cable"/>
+        </record>
+
+    </data>
+</openerp>
