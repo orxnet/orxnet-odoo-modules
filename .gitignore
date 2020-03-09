@@ -34,3 +34,5 @@ base2.cfg
 logfile
 *.save
 *.save.*
+venv
+.venv
